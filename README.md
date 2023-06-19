@@ -4,12 +4,12 @@ This repository is a complete Express starter pack that follows industry standar
 
 # Features
 
-```json
+```js
 SOLID Principle
-Repository Pattern
-MVC
-Error Handling
-Schema Validation
+RESPOSITORY Pattern
+MVC Pattern
+ERROR Handling
+SCHEMA Validation
 ```
 
 # Getting Started
