@@ -4,11 +4,13 @@ This repository is a complete Express starter pack that follows industry standar
 
 # Features
 
+```json
 SOLID Principle
 Repository Pattern
 MVC
 Error Handling
 Schema Validation
+```
 
 # Getting Started
 
@@ -46,47 +48,50 @@ POSTGRES_PASSWORD
 TYPE=postgres
 POSTGRES_SYNC=true
 
-The EXPRESS_PORT variable specifies the port that the application will listen on. The POSTGRES_* variables specify the connection details for the PostgreSQL database. The TYPE variable specifies the type of database that the application will use. The POSTGRES_SYNC is set to autmatically migrate your entities to your database everytime it detects changes to your entities
+The EXPRESS_PORT variable specifies the port that the application will listen on.
+The POSTGRES_* variables specify the connection details for the PostgreSQL database.
+The TYPE variable specifies the type of database that the application will use.
+The POSTGRES_SYNC is set to autmatically migrate your entities to your database everytime it detects changes to your entities
 ```
 
 # Configurations
 
 The following configurations are already set up and ready to use:
 
-````json
-
+```json
 {
-"tsconfig.json": "This file configures the TypeScript compiler.",
-"nodemon.json": "This file configures Nodemon, a tool that will automatically restart the application when changes are made to the code.",
-"vscode": "This folder contains a VSCode configuration file that will set up the editor with the necessary settings and extensions.",
-"eslintrc": "This file configures ESLint, a tool that will lint the code for errors."
+  "tsconfig.json": "This file configures the TypeScript compiler.",
+  "nodemon.json": "This file configures Nodemon, a tool that will automatically restart the application when changes are made to the code.",
+  "vscode": "This folder contains a VSCode configuration file that will set up the editor with the necessary settings and extensions.",
+  "eslintrc": "This file configures ESLint, a tool that will lint the code for errors."
 }
-
-
+```
 
 ## User table to populate in the request
 
-| Parameter | Type     | Description                |
-| :-------- | :------- | :------------------------- |
-| `firstName` | `string` | **Required** |
-| `middlename` | `string` | **Required** |
-| `LastName` | `string` | **Required** |
-| `email` | `string` | **Required**  **unique** |
+| Parameter    | Type     | Description             |
+| :----------- | :------- | :---------------------- |
+| `firstName`  | `string` | **Required**            |
+| `middlename` | `string` | **Required**            |
+| `LastName`   | `string` | **Required**            |
+| `email`      | `string` | **Required** **unique** |
 
 ## Endpoints
+
 The following endpoints are available for the user resource:
 
 #### POST /public/v1/user/user
+
 Create a new user.
 
 ```json
 {
-    "firstName" : "Jayvee",
-    "lastName" : "Ramos",
-    "middleName": "Palomo",
-    "email": "jayvee@email.com"
+  "firstName": "Jayvee",
+  "lastName": "Ramos",
+  "middleName": "Palomo",
+  "email": "jayvee@email.com"
 }
-````
+```
 
 #### GET /public/v1/user/users-list
 
