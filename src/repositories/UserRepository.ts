@@ -2,12 +2,27 @@ import { Repository } from 'typeorm';
 
 import { UserRepository } from '../common';
 import { User } from '../entities';
+import {
+  applyFieldSelection,
+  applyFilter,
+  applyPaging,
+  applySorting,
+} from '../utils';
 
 export class UserRepositoryImpl implements UserRepository {
   constructor(private readonly repository: Repository<User>) {}
 
-  async index() {
-    const items = await this.repository.find();
+  async index(args) {
+    const query = this.repository.createQueryBuilder('user');
+    applyFilter(query, 'user', args?.email);
+    applySorting(query, args?.sortBy, args?.sortOrder);
+    applyFieldSelection(query, 'user', args.fields);
+
+    if (args.page || args.pageSize) {
+      applyPaging(query, args?.page, args?.pageSize);
+    }
+
+    const items = await query.getMany();
     return {
       items,
       total: items.length,
@@ -16,11 +31,9 @@ export class UserRepositoryImpl implements UserRepository {
   }
 
   async show(args: Partial<User>) {
-    const user = await this.repository.findOne({
-      where: {
-        ...args,
-      },
-    });
+    const queryBuilder = this.repository.createQueryBuilder('user');
+    queryBuilder.where(args);
+    const user = await queryBuilder.getOne();
     return user;
   }
 

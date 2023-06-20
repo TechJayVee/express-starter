@@ -3,7 +3,7 @@
 import 'dotenv/config';
 import { NextFunction, Request, Response } from 'express';
 
-import { CustomError } from '../utils';
+import { CustomError } from '../../utils';
 
 const devErrors = (res: Response, error: CustomError) => {
   res.status(error.statusCode).json({
@@ -47,7 +47,7 @@ const prodErrors = (res: Response, error: CustomError) => {
   }
 };
 
-export default (
+export const globalErrorHandler = (
   error: CustomError,
   req: Request,
   res: Response,

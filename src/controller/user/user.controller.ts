@@ -6,7 +6,7 @@ import { CustomError, errorHandlerWrapper } from '../../utils';
 export class UserController {
   static getAllUser = errorHandlerWrapper(
     async (req: Request, res: Response) => {
-      const users = await userRepository.index();
+      const users = await userRepository.index(req.query);
       res.json(users);
     }
   );

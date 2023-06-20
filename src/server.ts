@@ -3,7 +3,7 @@ import cors from 'cors';
 import 'dotenv/config';
 import express, { Application, NextFunction, Request, Response } from 'express';
 
-import globalErrorHandler from './controller/errorController';
+import { globalErrorHandler } from './controller';
 import { AppDataSource } from './data-source';
 import { private_api, public_api } from './routes';
 import { CustomError } from './utils';
@@ -13,7 +13,7 @@ const server: Application = express();
 const PORT = process.env.PORT || 8000;
 
 server.use(cors());
-
+console.log(process.env);
 // establish database connection
 AppDataSource.initialize()
   .then(() => {
@@ -36,7 +36,7 @@ server.use('/public/v1', public_api);
 
 server.use('/private/v1', private_api);
 server.get('/', (req: Request, res: Response) =>
-  res.send(`Welcome to Stater  API `)
+  res.send(`Welcome to Starter  API `)
 );
 
 server.all('/*', (req: Request, res: Response, next: NextFunction) => {
