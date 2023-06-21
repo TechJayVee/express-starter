@@ -1,4 +1,6 @@
+import bcrypt from 'bcrypt';
 import {
+  BeforeInsert,
   Column,
   CreateDateColumn,
   DeleteDateColumn,
@@ -24,8 +26,34 @@ export class User {
   @Column({ name: 'middle_name', type: 'varchar', nullable: false })
   middleName?: string;
 
+  @Column({ name: 'password', type: 'varchar', nullable: true })
+  password?: string;
+
+  @BeforeInsert()
+  async hashPassword() {
+    if (this.password) {
+      this.password = await bcrypt.hash(this.password, 10);
+    }
+  }
+
   @Column({ type: 'varchar', name: 'email', unique: true })
   email: string;
+
+  @Column({ nullable: true, name: 'profile_picture', type: 'varchar' })
+  profilePicture!: string;
+
+  @Column({ nullable: true, name: 'refresh_token', type: 'varchar' })
+  refreshToken?: string;
+
+  @Column({ nullable: true, name: 'password_reset_token', type: 'varchar' })
+  passwordResetToken!: string;
+
+  @Column({
+    nullable: true,
+    name: 'password_reset_expires',
+    type: 'timestamp with time zone',
+  })
+  passwordResetExpires!: Date;
 
   @UpdateDateColumn({ name: 'updated_at', type: 'date' })
   updatedAt?: Date;
@@ -35,4 +63,11 @@ export class User {
 
   @DeleteDateColumn({ name: 'deleted_at', type: 'date' })
   deletedAt?: Date;
+
+  toJSON(): Partial<User> {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password, id, passwordResetToken, passwordResetExpires, ...user } =
+      this;
+    return user;
+  }
 }

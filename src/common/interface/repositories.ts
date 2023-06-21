@@ -1,6 +1,21 @@
 import { User } from '../../entities';
 
-import { Pagination } from './interface';
+import {
+  AuthResponse,
+  ChangePassword,
+  MessageResponse,
+  Pagination,
+} from './interface';
+
+interface BaseAuthRepository<T, Args> {
+  register?: (args: Args) => Promise<T>;
+  login?: (args: Args) => Promise<AuthResponse>;
+  sendPasswordResetEmail?: (email: string) => Promise<MessageResponse>;
+  resetPassword?: (args: Args) => Promise<MessageResponse>;
+  changePassword?: (args: ChangePassword) => Promise<MessageResponse>;
+  logout?: (refreshToken: string) => Promise<MessageResponse>;
+  refreshToken?: (refreshToken: string) => Promise<MessageResponse>;
+}
 
 export interface BaseRepository<T, Args> {
   index?: (
@@ -19,3 +34,4 @@ export interface BaseRepository<T, Args> {
 }
 
 export type UserRepository = BaseRepository<User, Partial<User>>;
+export type AuthenticationRepository = BaseAuthRepository<User, Partial<User>>;
