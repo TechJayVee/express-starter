@@ -52,3 +52,9 @@ export interface ResetPassword {
 export interface RequestUserAuth extends Request {
   user: BaseUserInfo;
 }
+
+export interface Role {
+  type?: string;
+  userId?: string;
+  role?: string[];
+}

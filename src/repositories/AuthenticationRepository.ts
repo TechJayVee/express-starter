@@ -51,6 +51,7 @@ export class AuthenticationRepositoryImpl implements AuthenticationRepository {
           id: user.id,
           userUuid: user.userUuid,
           email: user.email,
+          type: user.type,
         },
         process.env.JWT_SECRET_TOKEN,
         { expiresIn: '7d' }
@@ -61,6 +62,7 @@ export class AuthenticationRepositoryImpl implements AuthenticationRepository {
             id: user.id,
             userUuid: user.userUuid,
             email: user.email,
+            type: user.type,
           },
         },
         process.env.JWT_REFRESH_SECRET_TOKEN,
