@@ -9,6 +9,8 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
+import { USER_TYPE } from '../common';
+
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
@@ -41,6 +43,13 @@ export class User {
 
   @Column({ nullable: true, name: 'profile_picture', type: 'varchar' })
   profilePicture!: string;
+
+  @Column({
+    type: 'enum',
+    default: USER_TYPE.REGULAR,
+    enum: Object.values(USER_TYPE),
+  })
+  type: USER_TYPE;
 
   @Column({ nullable: true, name: 'refresh_token', type: 'varchar' })
   refreshToken?: string;
