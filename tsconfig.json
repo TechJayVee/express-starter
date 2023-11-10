@@ -10,7 +10,7 @@
     "experimentalDecorators": true,
     "sourceMap": true,
     "strict": false,
-    //  "types": ["multer"],
+    "types": ["multer"],
     "allowSyntheticDefaultImports": true
   },
   "include": ["src/**/*"]

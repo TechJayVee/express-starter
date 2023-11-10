@@ -52,6 +52,9 @@ export interface ResetPassword {
 export interface RequestUserAuth extends Request {
   user: BaseUserInfo;
 }
+export interface RequestWithFile extends Request {
+  file: Express.Multer.File;
+}
 
 export interface Role {
   type?: string;
